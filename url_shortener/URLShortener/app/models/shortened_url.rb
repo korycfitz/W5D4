@@ -1,3 +1,7 @@
 class ShortenedUrl < ApplicationRecord
-    validates :short_url, presence: true, unique: true 
+    validates :long_url, :short_url, presence: true, uniqueness: { scope: :long_url }
+
+    def self.random_code
+        SecureRandom.urlsafe_base64
+    end
 end
